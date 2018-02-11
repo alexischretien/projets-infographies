@@ -51,9 +51,12 @@ lumineux.
 ### Sous-question 2.1
 
 Dans un premier temps, vous devez implémenter le chargement de la scène. Une
-scène est une boîte rectangulaire, de dimensions $`w \times h`$. Celle-ci peut
-contenir différents objets. Pour simplifier, nous supposerons que les seuls
-objets qui apparaissent dans une scène sont:
+scène est une boîte rectangulaire, de dimensions $`w \times h`$. Ses quatre
+coins se trouvent donc en position $`(0,0)`$, $`(w,0)`$, $`(0,h)`$ et
+$`(w,h)`$.
+
+La scène peut contenir différents objets. Pour simplifier, nous supposerons que
+les seuls types d'objets qui apparaissent dans une scène sont:
 
 - des *cercles*, paramétrés par leur *centre* et leur *rayon* ou
 - des *boîtes*, paramétrées par leur *centre*, leur largeur et hauteur.
@@ -62,10 +65,10 @@ Une scène sera représentée par un fichier au format JSON, tel qu'illustré pa
 le fichier [scene.json](exemples/scene.json) disponible dans ce dépôt. Notez
 qu'il est très facile de manipuler un fichier au format JSON en Python,
 puisqu'il existe un [module fourni par défaut directement dans la bibliothèque
-standard](https://docs.python.org/2/library/json.html). Notez que vous n'avez
-pas besoin de valider si le format du fichier est valide ou non: vous pouvez
-prendre pour acquis que je testerai votre programme seulement avec des scènes
-valides.
+standard](https://docs.python.org/2/library/json.html). Pour ne pas perdre trop
+de temps, vous n'avez pas besoin de vérifier si le format du fichier est valide
+ou non: vous pouvez prendre pour acquis que je testerai votre programme
+seulement avec des scènes valides.
 
 On s'attend donc à ce que la commande
 ```python
@@ -98,9 +101,8 @@ produise un fichier `scene.png` représentant la scène décrite dans le fichier
 
 ### Sous-question 2.3
 
-Finalement, vous devrez dessiner la propagation d'un rayon lumineux à
-l'intérieur de votre scène. Un rayon lumineux est décrit par les paramètres
-suivants:
+Finalement, vous devrez tracer la propagation d'un rayon lumineux à l'intérieur
+de votre scène. Un rayon lumineux est décrit par les paramètres suivants:
 
 - Son *point de départ*, représenté par un point 2D;
 - Sa *direction*, représentée par un vecteur 2D;
@@ -124,6 +126,10 @@ produise un fichier `scene.png` représentant la scène décrite dans le fichier
 `exemple/scene.json` avec un rayon (identifié par une couleur différente des
 objets pour mieux le repérer) qui démarre au point $`(20,20)`$, en direction
 $`(5,3)`$ et qui effectue $`8`$ rebonds.
+
+Ici aussi, vous pouvez supposer que le rayon lumineux aura un point de départ
+valide, c'est-à-dire qu'il se situera toujours dans la scène, et qu'il ne sera
+pas à l'intérieur d'un des objets.
 
 ## Question 3
 
