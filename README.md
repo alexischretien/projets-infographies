@@ -158,7 +158,7 @@ fichier, mais vous devez préciser les vecteurs normaux.
 Ensuite, étendez votre programme `q3.py` pour qu'il génère un tore. L'équation
 paramétrique du tore est assez similaire à celle de la sphère:
 ```math
-s(u,v) = ((R + r\cos(v))\cos(u), (R + r\cos(v))\sin(u), r\sin(v))
+s(u,v) = ((R + r\cos(u))\cos(v), (R + r\cos(u))\sin(v), r\sin(u))
 ```
 
 Vous utiliserez donc les paramètres suivants:
