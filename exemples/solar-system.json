@@ -1,0 +1,30 @@
+{
+    "star": {
+        "name": "sun",
+        "radius": 1.0,
+        "color": [0.0, 1.0, 1.0]
+    },
+    "planets": [
+        {
+            "name": "pluto",
+            "radius": 0.1,
+            "distance-from-star": 6.2,
+            "period": 100,
+            "color": [0.8, 0.8, 0.8]
+        },
+        {
+            "name": "jupiter",
+            "radius": 0.2,
+            "distance-from-star": 1.5,
+            "period": 32,
+            "color": [1.0, 0.0, 0.0]
+        },
+        {
+            "name": "mars",
+            "radius": 0.7,
+            "distance-from-star": 2.8,
+            "period": 50,
+            "color": [0.0, 0.0, 1.0]
+        }
+    ]
+}

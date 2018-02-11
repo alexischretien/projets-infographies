@@ -178,5 +178,43 @@ $`v_n = 16`$.
 
 ## Question 4
 
-L'objectif de cette question consistera à générer une animation de façon
-procédurale. À compléter bientôt.
+En vous inspirant du tutoriel YouTube disponible au lien
+[https://www.youtube.com/watch?v=nmLjYSmaW48](https://www.youtube.com/watch?v=nmLjYSmaW48),
+écrivez un script Blender qui permet de générer une animation simplifiée d'un
+système solaire. Votre script devra prendre en entrée un fichier au format JSON
+qui indiquera la valeur des paramètres. Un exemple se trouve dans le fichier
+[solar-system.json](exemples/solar-system.json)
+
+Quelques explications sur les paramètres:
+
+- `"name"` est le nom de l'étoile ou de la planète. Il n'est pas vraiment utile
+  pour l'animation, mais permet d'identifier les objets.
+- `"radius"` est le rayon de la sphère qui représente l'étoile ou la planète.
+- `"color"` est un triplet RGB qui représente la couleur (*diffuse*) du
+  matériau utilisé pour représent l'objet. Vous êtes libre d'ajouter une
+  réflexion spéculaire ou une texture supplémentaire pour donner un relief à
+  vos objets.
+- `"distance-from-star"` est la distance (en unité Blender) du centre de
+  l'objet par rapport au centre de l'étoile.
+- `"period"` est le nombre d'images (*frames*) qu'il faut compléter pour qu'une
+  planète fasse un tour complet autour de l'étoile.
+
+Comme il s'agit d'un cours d'infographie, vous n'avez pas besoin de valider si
+le fichier JSON est intègre: vous pouvez supposer que votre animation sera
+testée avec des données valides. Assurez-vous cependant que la caméra capture
+bien la totalité des orbites de chaque planète. Il est également recommandé de
+ne pas démarrer à partir d'un script vide. Par exemple, le script
+[generate_scene.py](https://gitlab.com/ablondin/inf5071-exercices/blob/master/exemples/generate_scene.py)
+constitue un bon point de départ.
+
+Au niveau du comportement, on s'attend à ce que la commande
+```sh
+python q4.py exemples/solar-system.json initial.blend animation.ogg
+```
+produise une animation au format OGG (c'est un format relativement portable
+supporté directement dans Blender), en prenant les informations dans le fichier
+`exemples/solar-system.json` et utilisant un fichier `initial.blend` dans
+lequel des objets prédéfinis existent déjà. Notez que l'utilisation du fichier
+`initial.blend` est optionnelle, mais elle peut simplifier une partie de la
+configuration de certains aspects de l'animation, par exemple la position de la
+caméra, l'arrière-plan de l'image produite, etc.
