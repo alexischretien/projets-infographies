@@ -136,7 +136,7 @@ pas à l'intérieur d'un des objets.
 Nous avons vu en classe qu'une sphère de rayon $`r`$ centrée en $`(0,0)`$
 pouvait être paramétrisée par la fonction vectorielle
 ```math
-s(u,v) = (r\sin(u)\cos(v), r\sin(u)\sin(v), r\cos(v))
+s(u,v) = (r\sin(u)\cos(v), r\sin(u)\sin(v), r\cos(u))
 ```
 
 Écrivez un programme en Python, nommé `q3.py` qui permet de générer une
