@@ -171,4 +171,5 @@ $`v_n = 16`$.
 
 ## Question 4
 
-À compléter.
+L'objectif de cette question consistera à générer une animation de façon
+procédurale. À compléter bientôt.
