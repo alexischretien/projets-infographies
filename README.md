@@ -23,7 +23,23 @@ Python fournis pour répondre aux différentes questions.
 
 ## Question 1
 
-À compléter.
+Dans cette question, vous devez fournir l'implémentation des classes `Point3D`
+et `Vector3D` du module [geometry3d.py](files/geometry3d.py)
+
+Les fonctions à implémenter sont identifiées par l'expression
+```python
+raise NotImplemented
+```
+
+Le comportement attendu pour chaque fonction est décrit dans la documentation
+de la fonction, incluant des exemples. Notez qu'il est possible de vérifier de
+façon automatique si les exemples fonctionnent bien à l'aide de la bibliothèque
+[Doctest](https://docs.python.org/2/library/doctest.html) de Python. Plus
+précisément, il suffit d'entrer la commande
+```sh
+python -m doctest geometry3d.py
+```
+pour lancer la suite de tests de façon automatique.
 
 ## Question 2
 
