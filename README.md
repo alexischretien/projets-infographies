@@ -35,11 +35,12 @@ Le comportement attendu pour chaque fonction est décrit dans la documentation
 de la fonction, incluant des exemples. Notez qu'il est possible de vérifier de
 façon automatique si les exemples fonctionnent bien à l'aide de la bibliothèque
 [Doctest](https://docs.python.org/2/library/doctest.html) de Python. Plus
-précisément, il suffit d'entrer la commande
+précisément, lorsque vous aurez terminé de répondre à cette question, on
+s'attend à ce qu'à la commande
 ```sh
-python -m doctest geometry3d.py
+python -m doctest q1.py
 ```
-pour lancer la suite de tests de façon automatique.
+lance une suite de tests automatiques qui réussiront tous.
 
 ## Question 2
 
