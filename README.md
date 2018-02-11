@@ -43,7 +43,86 @@ pour lancer la suite de tests de façon automatique.
 
 ## Question 2
 
-À compléter.
+L'objectif de cette question est de développer un petit programme Python qui
+permet de modéliser une scène 2D simplifiée, dans laquelle évolue un rayon
+lumineux.
+
+### Sous-question 2.1
+
+Dans un premier temps, vous devez implémenter le chargement de la scène. Une
+scène est une boîte rectangulaire, de dimensions $`w \times h`$. Celle-ci peut
+contenir différents objets. Pour simplifier, nous supposerons que les seuls
+objets qui apparaissent dans une scène sont:
+
+- des *cercles*, paramétrés par leur *centre* et leur *rayon* ou
+- des *boîtes*, paramétrées par leur *centre*, leur largeur et hauteur.
+
+Une scène sera représentée par un fichier au format JSON, tel qu'illustré par
+le fichier [scene.json](exemples/scene.json) disponible dans ce dépôt. Notez
+qu'il est très facile de manipuler un fichier au format JSON en Python,
+puisqu'il existe un [module fourni par défaut directement dans la bibliothèque
+standard](https://docs.python.org/2/library/json.html). Notez que vous n'avez
+pas besoin de valider si le format du fichier est valide ou non: vous pouvez
+prendre pour acquis que je testerai votre programme seulement avec des scènes
+valides.
+
+On s'attend donc à ce que la commande
+```python
+python q2.py exemple/scene.json
+```
+charge en mémoire la scène et affiche son contenu sur `stdout` quelque chose du
+genre (vous avez une certaine liberté au niveau de l'affichage):
+```python
+Scene of dimensions 400 x 300
+Containing 3 objects:
+- A circle of radius 50, centered in (200,300)
+- A circle of radius 100, centered in (400,0)
+- A box of width 100 and height 30, centered in (100,100)
+```
+
+### Sous-question 2.2
+
+Lorsque vous aurez implémenté le chargement de la scène, vous devrez ensuite
+offrir un service qui permet de générer la scène dans une image au format PNG,
+à l'aide de la bibliothèque [Pillow](https://pillow.readthedocs.io/en/latest/).
+Dans cette scène, il suffira simplement d'afficher les cercles et les boîtes au
+bon endroit, ainsi que les limites.
+
+Ainsi, on aimerait que la commande
+```python
+python q2.py exemple/scene.json scene.png
+```
+produise un fichier `scene.png` représentant la scène décrite dans le fichier
+`exemple/scene.json`.
+
+### Sous-question 2.3
+
+Finalement, vous devrez dessiner la propagation d'un rayon lumineux à
+l'intérieur de votre scène. Un rayon lumineux est décrit par les paramètres
+suivants:
+
+- Son *point de départ*, représenté par un point 2D;
+- Sa *direction*, représentée par un vecteur 2D;
+- Son *intensité*, représentée par un entier positif.
+
+Lorsqu'un rayon lumineux percute un objet de la scène ou une des limites de la
+scène, il est réfléchi selon le vecteur normal à la surface ou se fait le
+contact. Comme les objets sont des boîtes ou des cercles, il est relativement
+facile de calculer leur vecteur normal en tout point de contact.
+
+Finalement, vous devrez tenir compte de l'intensité de la lumière pour évaluer
+le nombre de *rebonds* qui peuvent être effectués par le rayon lumineux. Plus
+précisément, le rayon fera un nombre de bond égal à son intensité. Par exemple,
+si son intensité est $`5`$, alors il sera réfléchi $`5`$ fois.
+
+On s'attend donc à ce que la commande
+```python
+python q2.py exemple/scene.json scene.png 20,20,5,3,8
+```
+produise un fichier `scene.png` représentant la scène décrite dans le fichier
+`exemple/scene.json` avec un rayon (identifié par une couleur différente des
+objets pour mieux le repérer) qui démarre au point $`(20,20)`$, en direction
+$`(5,3)`$ et qui effectue $`8`$ rebonds.
 
 ## Question 3
 
