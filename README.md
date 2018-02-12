@@ -21,7 +21,7 @@ des deux versions vous avez utilisée lors de la remise.
 Remplissez le gabarit [solution.md](solution.md) en complément aux fichiers
 Python fournis pour répondre aux différentes questions.
 
-## Question 1
+## Question 1 (20 points)
 
 Dans cette question, vous devez fournir l'implémentation des classes `Point3D`
 et `Vector3D` du module [geometry3d.py](files/geometry3d.py)
@@ -42,13 +42,13 @@ python -m doctest q1.py
 ```
 lance une suite de tests automatiques qui réussiront tous.
 
-## Question 2
+## Question 2 (30 points)
 
 L'objectif de cette question est de développer un petit programme Python qui
 permet de modéliser une scène 2D simplifiée, dans laquelle évolue un rayon
 lumineux.
 
-### Sous-question 2.1
+### Sous-question 2.1 (10 points)
 
 Dans un premier temps, vous devez implémenter le chargement de la scène. Une
 scène est une boîte rectangulaire, de dimensions $`w \times h`$. Ses quatre
@@ -84,7 +84,7 @@ Containing 3 objects:
 - A box of width 100 and height 30, centered in (100,100)
 ```
 
-### Sous-question 2.2
+### Sous-question 2.2 (5 points)
 
 Lorsque vous aurez implémenté le chargement de la scène, vous devrez ensuite
 offrir un service qui permet de générer la scène dans une image au format PNG,
@@ -99,7 +99,7 @@ python q2.py exemple/scene.json scene.png
 produise un fichier `scene.png` représentant la scène décrite dans le fichier
 `exemple/scene.json`.
 
-### Sous-question 2.3
+### Sous-question 2.3 (15 points)
 
 Finalement, vous devrez tracer la propagation d'un rayon lumineux à l'intérieur
 de votre scène. Un rayon lumineux est décrit par les paramètres suivants:
@@ -131,7 +131,7 @@ Ici aussi, vous pouvez supposer que le rayon lumineux aura un point de départ
 valide, c'est-à-dire qu'il se situera toujours dans la scène, et qu'il ne sera
 pas à l'intérieur d'un des objets.
 
-## Question 3
+## Question 3 (20 points)
 
 Nous avons vu en classe qu'une sphère de rayon $`r`$ centrée en $`(0,0)`$
 pouvait être paramétrisée par la fonction vectorielle
@@ -176,7 +176,7 @@ python q3.py tore 5 2 32 16 > tore.obj
 produise un tore avec les paramètres $`R = 5`$, $`r = 2`$, $`u_n = 32`$ et
 $`v_n = 16`$.
 
-## Question 4
+## Question 4 (30 points)
 
 En vous inspirant du tutoriel YouTube disponible au lien
 [https://www.youtube.com/watch?v=nmLjYSmaW48](https://www.youtube.com/watch?v=nmLjYSmaW48),
