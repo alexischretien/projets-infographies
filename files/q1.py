@@ -22,7 +22,9 @@ class Point3D(object):
 
         >>> p = Point3D(4,-2,1)
         """
-        raise NotImplemented
+        self.x = x
+        self.y = y
+        self.z = z
 
     def __eq__(self, other):
         r"""
@@ -33,7 +35,7 @@ class Point3D(object):
         >>> Point3D(2,1,3) == Point3D(1,2,3)
         False
         """
-        raise NotImplemented
+        return self.x == other.x and self.y == other.y and self.z == other.z
 
     def __sub__(self, other):
         r"""
@@ -42,7 +44,11 @@ class Point3D(object):
         >>> Point3D(1,4,3)- Point3D(2,1,0)
         Vector3D(-1,3,3)
         """
-        raise NotImplemented
+        dx = self.x - other.x
+        dy = self.y - other.y
+        dz = self.z - other.z
+
+        return Vector3D(dx, dy, dz)
 
     def distance(self, other):
         r"""
@@ -51,7 +57,11 @@ class Point3D(object):
         >>> is_close(Point3D(2,0,1).distance(Point3D(1,4,8)), 8.124)
         True
         """
-        raise NotImplemented
+        dx = self.x - other.x
+        dy = self.y - other.y
+        dz = self.z - other.z
+
+        return sqrt(dx*dx + dy*dy + dz*dz)
 
 class Vector3D(object):
 
@@ -61,7 +71,9 @@ class Vector3D(object):
 
         >>> u = Vector3D(1,-2,3)
         """
-        raise NotImplemented
+        self.x = x
+        self.y = y
+        self.z = z
 
     def __repr__(self):
         r"""
@@ -70,7 +82,7 @@ class Vector3D(object):
         >>> Vector3D(-2,3,5)
         Vector3D(-2,3,5)
         """
-        raise NotImplemented
+        return 'Vector3D({},{},{})'.format(self.x, self.y, self.z)
 
     def __eq__(self, other):
         r"""
@@ -81,7 +93,7 @@ class Vector3D(object):
         >>> Vector3D(1,2,3) == Vector3D(4,5,6)
         False
         """
-        raise NotImplemented
+        return self.x == other.x and self.y == other.y and self.z == other.z
 
     def __add__(self, other):
         r"""
@@ -90,7 +102,11 @@ class Vector3D(object):
         >>> Vector3D(1,2,3) + Vector3D(4,5,6)
         Vector3D(5,7,9)
         """
-        raise NotImplemented
+        ax = self.x + other.x
+        ay = self.y + other.y
+        az = self.z + other.z
+
+        return Vector3D(ax, ay, az)
 
     def __sub__(self, other):
         r"""
@@ -99,14 +115,22 @@ class Vector3D(object):
         >>> Vector3D(1,2,3) - Vector3D(4,5,6)
         Vector3D(-3,-3,-3)
         """
-        raise NotImplemented
+        sx = self.x - other.x
+        sy = self.y - other.y
+        sz = self.z - other.z
+        
+        return Vector3D(sx, sy, sz)
 
     def __rmul__(self, scalar):
         r"""
         >>> 2 * Vector3D(1,2,3)
         Vector3D(2,4,6)
         """
-        raise NotImplemented
+        rx = self.x * scalar
+        ry = self.y * scalar
+        rz = self.z * scalar
+
+        return Vector3D(rx, ry, rz)
 
     def __neg__(self):
         r"""
@@ -118,7 +142,11 @@ class Vector3D(object):
         >>> v + (-v) == Vector3D.zero()
         True
         """
-        raise NotImplemented
+        nx = -1 * self.x
+        ny = -1 * self.y
+        nz = -1 * self.z
+
+        return Vector3D(nx, ny, nz)
 
     @staticmethod
     def zero():
@@ -128,7 +156,7 @@ class Vector3D(object):
         >>> Vector3D.zero() == Vector3D(0,0,0)
         True
         """
-        raise NotImplemented
+        return Vector3D(0,0,0)
 
     def square_norm(self):
         r"""
@@ -139,7 +167,7 @@ class Vector3D(object):
         >>> is_close(Vector3D(1,1,0).square_norm(), 2.0)
         True
         """
-        raise NotImplemented
+        return self.x * self.x + self.y * self.y + self.z * self.z
 
     def norm(self):
         r"""
@@ -150,7 +178,8 @@ class Vector3D(object):
         >>> is_close(Vector3D(1,1,0).norm(), 1.4142)
         True
         """
-        raise NotImplemented
+
+        return sqrt(self.square_norm())
 
     def normalize(self):
         r"""
@@ -164,7 +193,10 @@ class Vector3D(object):
         >>> is_close(u.norm(), 1.0)
         True
         """
-        raise NotImplemented
+        norm = self.norm()
+        self.x = self.x / norm
+        self.y = self.y / norm
+        self.z = self.z / norm
 
     def dot_product(self, other):
         r"""
@@ -175,7 +207,8 @@ class Vector3D(object):
         >>> is_close(Vector3D(1,-2,4).dot_product(Vector3D(2,-1,-1)), 0.0)
         True
         """
-        raise NotImplemented
+    
+        return self.x * other.x + self.y * other.y + self.z * other.z
 
     def cross_product(self, other):
         r"""
@@ -188,7 +221,11 @@ class Vector3D(object):
         >>> Vector3D(1,0,0).cross_product(Vector3D(1,0,0)) == Vector3D.zero()
         True
         """
-        raise NotImplemented
+        cx = self.y * other.z - self.z * other.y
+        cy = self.z * other.x - self.x * other.z
+        cz = self.x * other.y - self.y * other.x
+
+        return Vector3D(cx, cy, cz)
                         
     def project(self, other):
         r"""
@@ -201,7 +238,10 @@ class Vector3D(object):
         >>> is_close(Vector3D(1,-1,1).project(Vector3D(1,2,3)).norm(), 0.5345)
         True
         """
-        raise NotImplemented
+        other.normalize()
+        plength = self.dot_product(other)
+  
+        return plength * other
 
     def reflect(self, normal):
         r"""
@@ -213,4 +253,5 @@ class Vector3D(object):
         >>> Vector3D(1,-1,-2).reflect(Vector3D(0,0,1))
         Vector3D(1.0,-1.0,2.0)
         """
-        raise NotImplemented
+        vm = self.project(normal)
+        return self - 2*vm
