@@ -35,7 +35,9 @@ class Point3D(object):
         >>> Point3D(2,1,3) == Point3D(1,2,3)
         False
         """
-        return self.x == other.x and self.y == other.y and self.z == other.z
+        return is_close(self.x, other.x) and \
+               is_close(self.y, other.y) and \
+               is_close(self.z, other.z)
 
     def __sub__(self, other):
         r"""
@@ -93,7 +95,9 @@ class Vector3D(object):
         >>> Vector3D(1,2,3) == Vector3D(4,5,6)
         False
         """
-        return self.x == other.x and self.y == other.y and self.z == other.z
+        return is_close(self.x, other.x) and \
+               is_close(self.y, other.y) and \
+               is_close(self.z, other.z)
 
     def __add__(self, other):
         r"""
