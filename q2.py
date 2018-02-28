@@ -27,6 +27,11 @@ from PIL import Image, ImageDraw, ImageColor
 from q1 import Point3D, Vector3D
 from math import sqrt
 
+ERR_INVALID_FILENAME = "Error : invalid filename"
+ERR_LIGHT_RAY_PARAMS = "Error : invalid number of parameters for light ray object"
+ERR_INVALID_JSON = "Error : invalid object(s) in json file. The scene " \
+                 + "only allows circles and boxes"
+ERR_NB_PARAMS = "Error : the program takes at least one argument"
 
 class Scene(object):
     """ Class containing the informations on a scene and the objects it contains.
@@ -182,13 +187,9 @@ class Circle(object):
                          lightRay.origin.z + lightRay.direction.z*t)
         normal = origin - self.center
         direction = lightRay.direction.reflect(normal)
-       # direction = lightRay.redirection(normal)
 
         return Ray(origin, direction, lightRay.intensity - 1)
     
-   # def hasOnRadius(self, point):
-   #     return abs(self.radius - self.center.distance(point)) < 0.001
-
 class Box(object):
     """ Class containing the information on a box.
 
@@ -480,7 +481,7 @@ def loadScene():
     try:
         jsonData = json.loads(open(sceneFile).read())
     except:
-        print("Error : invalid filename")
+        print(ERR_INVALID_FILENAME)
         sys.exit(0)
           
     lightRay = None
@@ -489,7 +490,7 @@ def loadScene():
     if (len(sys.argv) > 3):
         params = [float(s) for s in sys.argv[3].split(",")]
         if (len(params) != 5):
-            print("Error : invalid number of parameters for light ray object")
+            print(ERR_LIGHT_RAY_PARAMS)
             sys.exit(0)
 
         origin = Point3D(params[0], params[1], 0)
@@ -501,8 +502,7 @@ def loadScene():
     try:
        scene = Scene(jsonData, lightRay)
     except: 
-        print("Error : invalid object(s) in json file. The scene " \
-            + "only allows circles and boxes")
+        print(ERR_INVALID_JSON)
         sys.exit(0)
 
     return scene
@@ -512,7 +512,7 @@ def loadScene():
 nbArgs = len(sys.argv)
 
 if (nbArgs < 2):
-    print("Error : the program takes at least one argument")
+    print(ERR_NB_PARAMS)
     sys.exit(0)
 
 scene = loadScene()
