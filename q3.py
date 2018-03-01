@@ -14,7 +14,7 @@ redirected to a file using a pipe.
     V      The number of latitudes.
 
 author : Alexis Chretien (CHRA25049209) 
-date : February 27th, 2018
+date : February 28th, 2018
 """
 import sys
 from math import sin, cos, pi
@@ -46,7 +46,7 @@ class Face(object):
     """ Class containing the informations on a face.
 
     Attributes:
-        vertices (list of vertices): The vertices associated to the face.
+        vertices (list of vertices): The vertices associated with the face.
     """
     def __init__(self, vertices):
         """ Creates an instance of face.
@@ -54,7 +54,7 @@ class Face(object):
         self.vertices = vertices
     
     def __repr__(self):
-        """ Returns a string representation of self
+        """ Returns a string representation of self.
         """
         s = "f"
         for v in self.vertices:
@@ -71,7 +71,6 @@ class Obj(object):
         center (Point3D): The object's center.
         nbLon (int): The number of longitudes.
         nbLat (int): The number of latitudes.
-        nbVertices (int): The number of vertices.
         vertices (list of vertices): The object's vertices.
         faces (list of faces): The object's faces.
     """
@@ -82,18 +81,18 @@ class Obj(object):
         self.center = Point3D(0.0, 0.0, 0.0)
         self.nbLon = nbLon
         self.nbLat = nbLat
-        self.nbVertices = nbLon*nbLat
         self.vertices = []
         self.faces = []
     
-    def calculateGeometry(self, u_domain, v_domain):
-        """ Calculates the object's geometries and fills self.vertices and
-        self.faces accordingly.
+    def calculateCyclicVertices(self, u_domain, v_domain):
+        """ Calculates the object's cyclic vertices and fills self.vertices
+        accordingly.
 
-        Finds all vertices and faces if self is a torus. In the case of a sphere,
-        all vertices and faces minus the ones associated to the two poles are found.
-        A specialized method defined sphere's class body can be used to find the
-        remaining geometries.
+        Finds all vertices if self is a torus. In the case of a sphere,
+        all vertices minus the poles are found. 
+
+        A specialized method defined in sphere class' body can be used to find the
+        remaining vertices.
 
         Args:
             u_domain (float): The u domain's end, in radians (should be pi for 
@@ -110,55 +109,48 @@ class Obj(object):
             v = dv/2
 
             while (v < v_domain):
-                p1 = self.getPoint(u, v)
-                p2 = self.getPoint(u+du, v)
-                p3 = self.getPoint(u+du, v+dv)
-                p4 = self.getPoint(u, v+dv)
-
-                normal = p1 - self.center
-                v1 = Vertice(p1, normal, noVertice)
-                self.vertices.append(v1)
-                self.addQuadFace( [p1, p2, p3, p4], noVertice )
-
+                point = self.getPoint(u, v)
+ 
+                normal = point - self.center
+                self.vertices.append( Vertice( point, normal, noVertice ) )
                 noVertice += 1
                 v += dv
             u += du
     
-    def addQuadFace(self, points, noVertice):
-        """ Creates the rectangular face associated with the 4 points in arguments.
+    def calculateQuadFaces(self):
+        """ Calculates the objects rectangular faces and fills self.faces
+        accordingly.
 
-        The method has to deduce the number id for the last three vertices
-        by using the first's.
+        Finds all faces if self is a torus. In the case of a sphere, all 
+        faces minus the triangular faces converging at the poles are found. 
 
-        Args:
-            points (list of 4 Point3D): The location of the four vertices making
-                                        up the rectangular face.
-            noVertice (int): The number id of the vertice defined by points[0]. 
+        A specifalized method defined in sphere class' body can be used to find 
+        the remaining faces.
+
+        precondition:
+            self.calculateCyclicVertices must have been called prior. 
         """
-        # To avoid adding faces for the last cycle of vertices for a sphere
-        if (noVertice <= self.nbVertices - self.nbLon or isinstance(self, Tore)):
-            verts = []
-            noVertices = [noVertice, \
-                          noVertice + 1, \
-                          noVertice + self.nbLon + 1, \
-                          noVertice + self.nbLon]
- 
-            # If we have completed a cycle around the radius. Wrapping up 
-            if (noVertice % self.nbLon == 0):
-                noVertices[2] = noVertice + 1
-                noVertices[1] = noVertices[2] - self.nbLon
-                                 
-            for i in range (0, 4):
-                # Only applicable for a tore. Links up beginning
-                # and end vertices to the same faces
-                if(noVertices[i] > self.nbVertices):
-                    noVertices[i] -= self.nbVertices
+        for index in range(0, self.nbQuadFaces):
+            
+            i = [index, index + 1, 0, index + self.nbLon]
+            faceVertices = []
 
-                normal = points[i] - self.center
-                verts.append( Vertice(points[i], normal, noVertices[i]) )
+            if (i[1] % self.nbLon != 0):
+                i[2] = i[1] + self.nbLon
+            # If we have completed a cycle around the radius. Wrapping up. 
+            else:
+                i[2] = i[1]
+                i[1] -= self.nbLon
+            
+            for j in range(0, 4):
+                # Condition can only ever pass for a tore. Links up the 
+                # first and last vertice cycles togheter.
+                if (i[j]  >= self.nbVertices):
+                    i[j] -= self.nbVertices
+                
+                faceVertices.append( self.vertices[ i[j] ] )
 
-            face = Face(verts)
-            self.faces.append(face)
+            self.faces.append( Face(faceVertices) )
 
     def __repr__(self):
         """ Return a string representation of self.
@@ -178,38 +170,51 @@ class Obj(object):
 
 class Sphere(Obj):
     """ Child class of Obj, representing a sphere
+
+    Attributes:
+        nbVertices: The sphere's number of vertices
+        nbQuadFaces: The sphere's number of rectangular faces.
+        nbTriFaces: The sphere's number of triangular faces. 
     """
     def __init__(self, radius, nbLon, nbLat):
         """ Creates an instance of sphere
         """
         Obj.__init__(self, radius, nbLon, nbLat)
-        self.calculateGeometry(pi, 2*pi)
+        self.nbVertices = nbLon * nbLat + 2
+        self.nbQuadFaces = nbLon * (nbLat - 1)
+        self.nbTriFaces = 2 * nbLon
+
+        self.calculateCyclicVertices(pi, 2*pi)
+        self.calculateQuadFaces()
         self.calculatePoles()
 
     def calculatePoles(self):
-        """ Finds the remaining geometries, assuming "self.calculateGeometry" has
-        been called prior. 
+        """ Finds the vertices and faces related to the two poles. 
 
         Finds the pole vertices and the faces associated with them.
+
+        Precondition:
+            self.calculateCyclicVertices and self.calculateQuadFaces
+            must have been called prior, in that order.
         """
         p1 = self.getPoint(0, 0)
         p2 = self.getPoint(pi, 2*pi)
     
-        pole1 = Vertice(p1, p1 - self.center, self.nbVertices + 1)
-        pole2 = Vertice(p2, p2 - self.center, self.nbVertices + 2)
+        pole1 = Vertice(p1, p1 - self.center, self.nbVertices - 1)
+        pole2 = Vertice(p2, p2 - self.center, self.nbVertices)
         
         begin1 = 0
-        begin2 = self.nbVertices - self.nbLon
+        begin2 = self.nbVertices - self.nbLon - 2
         end1 = self.nbLon
-        end2 = self.nbVertices
-
+        end2 = begin2 + self.nbLon
+        
         # Getting the two cycles of vertices to form tri faces with the poles
         vertCycle1 = self.vertices[ begin1 : end1 ]
         vertCycle1.append( self.vertices[ begin1 ] )
 
         vertCycle2 = self.vertices[ begin2 : end2 ] 
         vertCycle2.append( self.vertices[ begin2 ] )
-      
+         
         # Creating the tri faces assosicated with each pole
         for i in range(0, self.nbLon):
             self.faces.append( Face([pole1, vertCycle1[i], vertCycle1[i+1]]) )
@@ -217,7 +222,6 @@ class Sphere(Obj):
         
         # Saving up the pole vertices   
         self.vertices.extend([pole1, pole2])
-        self.nbVertices += 2
 
     def getPoint(self, u, v):
         """ Finds a point on self's surface using u, v coordinates. 
@@ -234,10 +238,19 @@ class Tore(Obj):
            
     def __init__(self, radius, minorRadius, nbLon, nbLat):
         """ Creates an instance of a torus.
+
+        Attributes:
+            minorRadius (float): The torus' minor radius
+            nbVertices (int): The number of vertices.
+            nbQuadFaces (int): The number of rectangular faces.
         """
         Obj.__init__(self, radius, nbLon, nbLat)
-        self.minorRadius = minorRadius      
-        self.calculateGeometry(2*pi, 2*pi)
+        self.minorRadius = minorRadius 
+        self.nbVertices = nbLon * nbLat
+        self.nbQuadFaces = nbLon * nbLat
+
+        self.calculateCyclicVertices(2*pi, 2*pi)
+        self.calculateQuadFaces()
         
     def getPoint(self, u, v):
         """ Finds a point on self's surface using u, v coordinates.
