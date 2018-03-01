@@ -124,7 +124,7 @@ class Obj(object):
         Finds all faces if self is a torus. In the case of a sphere, all 
         faces minus the triangular faces converging at the poles are found. 
 
-        A specifalized method defined in sphere class' body can be used to find 
+        A specialized method defined in sphere class' body can be used to find 
         the remaining faces.
 
         precondition:
@@ -269,37 +269,33 @@ def getObject():
     Returns a tore or sphere object if the arguments are valid.
     """
     nbArgs = len(sys.argv)
-    error = False
-
+   
     # validating argv params
     if (nbArgs < 2):
         print(ERR_NB_PARAMS)
-        error = True
-    
+        sys.exit(0)
+  
     type = sys.argv[1]
 
     if (type != "sphere" and type != "tore"):
         print(ERR_INVALID_OBJECT.format(sys.argv[1]))
-        error = True
+        sys.exit(0)
 
     elif (type == "sphere" and nbArgs != 5):
         print(ERR_NB_PARAMS_OBJECT.format("sphere", 3))
-        error = True       
+        sys.exit(0)       
 
     elif (type == "tore" and nbArgs != 6):
         print(ERR_NB_PARAMS_OBJECT.format("tore", 4))
-        error = True
+        sys.exit(0)
 
     else:
         params = [int(s) for s in sys.argv if s.isdigit() and int(s) > 0]
 
         if (nbArgs - len(params) != 2):
             print(ERR_PARAM_TYPE)
-            error = True
+            sys.exit(0)
 
-    if (error):
-        sys.exit(0)
-    
     # instanciating the object
     if (type == "sphere"):
         object = Sphere(params[0], params[1], params[2])
