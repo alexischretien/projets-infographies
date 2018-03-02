@@ -7,14 +7,15 @@ to generate the image of the scene. If a filename has given, the user may also
 specify the properties of light ray. The trajectory of this light ray will be
 traced on the image.
 
-    $ python q2.py [<OPTINAL> FILE [<OPTINAL> [OX],[OY],[DX],[DY],[I]]]
-
-    FILE    Relative path of the image file to be produced.
-    OX      X coordinate of the light ray's origin point.
-    OY      Y coordinate of the light ray's origin point.
-    DX      X coordiante of the light ray's direction vector.
-    DY      Y coordinate of the light ray's direction vector.
-    I       Intensity of the light ray (number of rebounces).
+    $ python q2.py SC_FILE [<OPTINAL> IMG_FILE [<OPTINAL> OX,OY,DX,DY,I] ]
+    
+    SC_FILE  Relative path of the json scene file
+    FILE     Relative path of the image file to be produced.
+    OX       X coordinate of the light ray's origin point.
+    OY       Y coordinate of the light ray's origin point.
+    DX       X coordiante of the light ray's direction vector.
+    DY       Y coordinate of the light ray's direction vector.
+    I        Intensity of the light ray (number of rebounces).
  
 author : Alexis Chretien (CHRA25049209)
 date : February 26th, 2018

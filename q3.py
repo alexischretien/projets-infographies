@@ -278,15 +278,15 @@ def getObject():
     type = sys.argv[1]
 
     if (type != "sphere" and type != "tore"):
-        print(ERR_INVALID_OBJECT.format(sys.argv[1]))
+        print(ERR_INVALID_OBJECT.format(type))
         sys.exit(0)
 
     elif (type == "sphere" and nbArgs != 5):
-        print(ERR_NB_PARAMS_OBJECT.format("sphere", 3))
+        print(ERR_NB_PARAMS_OBJECT.format(type, 3))
         sys.exit(0)       
 
     elif (type == "tore" and nbArgs != 6):
-        print(ERR_NB_PARAMS_OBJECT.format("tore", 4))
+        print(ERR_NB_PARAMS_OBJECT.format(type, 4))
         sys.exit(0)
 
     else:
