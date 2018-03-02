@@ -81,7 +81,7 @@ class Scene(object):
         image = Image.new('RGB', (self.width, self.height), (255,255,255))
         draw  = ImageDraw.Draw(image)
 
-        for o in self.objects:
+        for o in self.objects[1:]:
             o.drawObject(draw)
 
         # If a light ray was specified
