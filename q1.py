@@ -198,9 +198,14 @@ class Vector3D(object):
         True
         """
         norm = self.norm()
-        self.x = self.x / norm
-        self.y = self.y / norm
-        self.z = self.z / norm
+        if (norm == 0):
+            self.x = 0
+            self.y = 0
+            self.z = 0
+        else:
+            self.x = self.x / norm
+            self.y = self.y / norm
+            self.z = self.z / norm
 
     def dot_product(self, other):
         r"""

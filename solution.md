@@ -15,13 +15,13 @@ aucun message ne sera affiché à la sortie standard.
 
 ## Solution à la question 2
 
-Le fichier [q2.py](q2.py) contient la solution à la question 2. Le lancementdu programme se 
-fait via l'exécution d'une commande de la forme
+Le fichier [q2.py](q2.py) contient la solution à la question 2. Le lancement du programme 
+se fait via l'exécution d'une commande de la forme
 ```
 python q2.py FICHIER_SCENE [<OPTIONNEL> FICHIER_IMAGE [<OPTIONNEL> OX,OY,DX,DY,I ] ]
 ```
-* `FICHIER_SCENE` : Le chemin relatif vers un fichier au format json contenant les 
-                    informations sur une scene composé de cercles et de boites.
+* `FICHIER_SCENE` : Le chemin relatif vers un fichier au format JSON contenant les 
+                    informations sur une scene composée de cercles et de boites.
 * `FICHIER_IMAGE` : Le nom de fichier de l'image à produire.
 * `OX` :            La coordonnée en x du point d'origine du rayon de lumière.
 * `OY` :            La coordonnée en y du point d'origine du rayon de lumière. 
@@ -64,7 +64,8 @@ python q3.py tore 5 2 32 16
 Permet d'afficher à la sortie standard le contenu d'un fichier OBJ décrivant un tore de rayon 
 majeur 5, de rayon mineur 2 et ayant 32 longitudes et 16 latitudes.
 
-Pour produire un le fichier OBJ, rediriger le contenu via un pipeline. Par exemple :
+Pour produire un fichier OBJ plutôt que d'afficher les informations, rediriger le contenu via un pipeline. 
+Par exemple :
 ```
 python q3.py tore 5 2 32 16 > tore.obj
 ```
@@ -90,9 +91,8 @@ python q4.py exemples/solar-system.json animation.ogg
 
 ## Références
 
-[lacim.uqam.ca/~blondin/fr/inf5071](Diapositives du cours INF5071)
-[https://stackoverflow.com/questions/1549909/intersection-on-circle-of-vector-originating-inside-circle](Stack Overflow) : Pour trouver l'intersection entre un rayon et une sphère 
-en utilisant une approche vectorielle. 
+* [Diapositives du cours INF5071](lacim.uqam.ca/~blondin/fr/inf5071)
+* [Stack Overflow](https://stackoverflow.com/questions/1549909/intersection-on-circle-of-vector-originating-inside-circle) : Pour trouver l'intersection entre un rayon et une sphère en utilisant une approche vectorielle. 
 
 ## État du devoir
 
