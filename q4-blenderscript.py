@@ -14,7 +14,6 @@ import json
 import sys
 import os
 import bpy
-import re
 from math import pi
 
 ERR_NB_PARAMS = "Error : 2 arguments required, {} provided."
