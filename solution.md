@@ -92,7 +92,7 @@ python q4.py exemples/solar-system.json animation.ogg
 ## Références
 
 * [Diapositives du cours INF5071](http://lacim.uqam.ca/~blondin/fr/inf5071)
-* [Stack Overflow](https://stackoverflow.com/questions/1549909/intersection-on-circle-of-vector-originating-inside-circle) : Pour trouver l'intersection entre un rayon et une sphère en utilisant une approche vectorielle. 
+* [Stack Overflow](https://stackoverflow.com/questions/1549909/intersection-on-circle-of-vector-originating-inside-circle) : Pour trouver l'intersection entre une ligne droite et un cercle en utilisant une approche vectorielle. 
 
 ## État du devoir
 
