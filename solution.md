@@ -49,7 +49,7 @@ Le fichier [q3.py](q3.py) contient la solution à la question 3. Son programme p
 l'équivalent d'un fichier au format OBJ décrivant une sphère ou un tore. Le lanchement du 
 programme se fait via l'exécution d'une commande de la forme
 ```
-python q3.py [<OPTIONNEL> sphere [R] [U] [V] | tore [RMAJ] [RMIN] [U] [V] ]
+python q3.py [sphere [R] [U] [V] | tore [RMAJ] [RMIN] [U] [V] ]
 ```
 * `R` :    Le rayon d'une sphère. 
 * `RMAJ` : Le rayon majeur d'un tore.
