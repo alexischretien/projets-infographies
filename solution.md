@@ -89,6 +89,12 @@ Exemple d'utilisation :
 python q4.py exemples/solar-system.json animation.ogg
 ``` 
 
+## Dépendances
+
+* Python 2.7.12
+* Blender 2.79
+* Pillow 5.0.0 (librairie Python)
+
 ## Références
 
 * [Diapositives du cours INF5071](http://lacim.uqam.ca/~blondin/fr/inf5071)
