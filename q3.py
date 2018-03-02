@@ -117,12 +117,12 @@ class Obj(object):
                 v += dv
             u += du
     
-    def calculateQuadFaces(self):
-        """ Calculates the objects rectangular faces and fills self.faces
-        accordingly.
+    def calculateCyclicFaces(self):
+        """ Calculates the objects faces formed by two rows of cyclic vertices
+        and fills self.faces accordingly.
 
         Finds all faces if self is a torus. In the case of a sphere, all 
-        faces minus the triangular faces converging at the poles are found. 
+        faces minus the faces converging at the poles are found. 
 
         A specialized method defined in sphere class' body can be used to find 
         the remaining faces.
@@ -147,10 +147,10 @@ class Obj(object):
                 # first and last vertice cycles togheter.
                 if (i[j]  >= self.nbVertices):
                     i[j] -= self.nbVertices
-                
-                faceVertices.append( self.vertices[ i[j] ] )
-
-            self.faces.append( Face(faceVertices) )
+                 
+            face1 = Face( [self.vertices[i[0]], self.vertices[i[1]], self.vertices[i[2]] ] )
+            face2 = Face( [self.vertices[i[2]], self.vertices[i[3]], self.vertices[i[0]] ] )
+            self.faces.extend( [face1, face2] )
 
     def __repr__(self):
         """ Return a string representation of self.
@@ -185,7 +185,7 @@ class Sphere(Obj):
         self.nbTriFaces = 2 * nbLon
 
         self.calculateCyclicVertices(pi, 2*pi)
-        self.calculateQuadFaces()
+        self.calculateCyclicFaces()
         self.calculatePoles()
 
     def calculatePoles(self):
@@ -194,7 +194,7 @@ class Sphere(Obj):
         Finds the pole vertices and the faces associated with them.
 
         Precondition:
-            self.calculateCyclicVertices and self.calculateQuadFaces
+            self.calculateCyclicVertices and self.calculateCyclicFaces
             must have been called prior, in that order.
         """
         p1 = self.getPoint(0, 0)
@@ -250,7 +250,7 @@ class Tore(Obj):
         self.nbQuadFaces = nbLon * nbLat
 
         self.calculateCyclicVertices(2*pi, 2*pi)
-        self.calculateQuadFaces()
+        self.calculateCyclicFaces()
         
     def getPoint(self, u, v):
         """ Finds a point on self's surface using u, v coordinates.
