@@ -7,7 +7,7 @@ de l'UQAM, donné par Alexandre Blondin Massé.
 
 Alexis Chrétien
 
-## Solution à la question 2
+## Scene
 
 Le fichier [scene.py](scene.py) contient l'implémentation d'un programme générant une
 scène composé de boites et de cercles. Le lancement du programme se fait via l'exécution 
