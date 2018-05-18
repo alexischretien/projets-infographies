@@ -18,7 +18,7 @@ import subprocess
 import sys
 
 command = ["blender"]
-params = ["--background", "--python", "q4-blenderscript.py", "--"]
+params = ["--background", "--python", "sys-blenderscript.py", "--"]
 
 if (len(sys.argv) > 1):
     params.extend( sys.argv[1:] )
